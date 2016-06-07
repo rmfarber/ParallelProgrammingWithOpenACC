@@ -30,12 +30,12 @@ Code versions:
 
 # Compilation
 
-make example_<name>
+make example_<name> COMPILER=PGI
 
 For example, in order to compile the serial version of the example, you
 can execute the following command:
 
-make example_serial
+make example_openacc_step1 COMPILER=PGI
 
 This creates an executable example_serial/example_serial.
 
