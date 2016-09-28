@@ -1,0 +1,33 @@
+These are compile lines for the different versions of the code as follows:
+1- The OpenMP version compiled with PGI complier
+	pgcc -mp -fast matrix-omp.c -o matrix-omp
+2- The OpenACC version using the auto clause
+ a- without the result validation
+	pgcc -acc -fast ta=nvidia -Minfo=accel  matrix-acc-auto.c -o matrix-acc-auto
+ b- with result validation (OpenMP threaded)
+	pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-auto.c -o matrix-acc-auto-ompcheck
+3- The OpenACC version using the independent and seq clauses
+ a- without the result validation
+	pgcc -acc -fast ta=nvidia -Minfo=accel matrix-acc-IndepSeq.c -o matrix-acc-IndepSeq
+ b- with result validation (OpenMP threaded)
+	pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-IndepSeq.c -o matrix-acc-IndepSeq-ompcheck
+4- - The OpenACC version using the independent and reduction clause
+ a- without the result validation
+	pgcc -acc -fast ta=nvidia -Minfo=accel matrix-acc-IndepRed.c -o matrix-acc-IndepRed
+ b- with result validation (OpenMP threaded)
+	pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-IndepRed.c -o matrix-acc-IndepRed-ompcheck
+5- - The OpenACC version using the collapse clause
+ a- without the result validation
+	pgcc -acc -fast ta=nvidia -Minfo=accel matrix-acc-collapse.c -o matrix-acc-collapse
+ b- with result validation (OpenMP threaded)
+	pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-collapse.c -o matrix-acc-collapse-ompcheck
+6- The OpenACC version using gang and vector clauses
+ a- without the result validation
+        pgcc -acc -fast ta=nvidia -Minfo=accel matrix-acc-gv.c -o matrix-acc-gv
+ b- with result validation (OpenMP threaded)
+        pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-gv.c -o matrix-acc-gv-ompcheck
+7- The OpenACC version using the tile clause
+ a- without the result validation
+	pgcc -acc -fast ta=nvidia -Minfo=accel matrix-acc-tile.c -o matrix-acc-tile
+ b- with result validation (OpenMP threaded)
+	pgcc -mp -acc -fast ta=nvidia -Minfo=accel -DCHECK  matrix-acc-tile.c -o matrix-acc-tile-ompcheck

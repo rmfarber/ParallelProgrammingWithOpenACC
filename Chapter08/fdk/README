@@ -1,0 +1,20 @@
+PGI compiler is used as an example to compile the program. 
+You can use other compiler and change the compilation flags.
+
+How to compile this program?
+========================================================
+To compile the CPU serial version:
+$ pgcc -O3 fdk.c -o fdk
+
+To compile the OpenACC version for multi-core CPU:
+$ pgcc -O3 -acc -ta=multicore -Minfo=accel fdk.c -o fdk
+
+To compile the OpenACC version for GPU target:
+$ pgcc -O3 -acc -ta=tesla:cc35,nofma -Minfo=accel fdk.c -o fdk
+
+To compile the CUDA version for GPU target:
+$ nvcc -O3 -arch=sm_35 -fmad=false fdk.cu -o fdk
+
+How to execute this program?
+========================================================
+$ ./fdk input.img output.img

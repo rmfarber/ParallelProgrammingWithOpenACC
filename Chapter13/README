@@ -1,0 +1,32 @@
+This folder contains openacc example codes
+
+# Content
+
+Contains several version of the same code, which mimics the structure
+of a simplified atmospheric model having only physical parametrizations
+and output.
+
+The code is structured as follows:
+
+main.f90                main driver, calls init, time loop, and output
+m_config.f90            configuration information domain size, number of steps
+m_fields.f90            global fields
+m_io.f90                output routine
+m_parametrization.f90   physical parametrizations doing the actual computation
+m_physics.f90           driver for the physical paramtrization
+m_setup.f90             code initialization and clean up
+m_timing                timing routines
+
+
+# Compilation
+
+make example_<name>
+
+For example, in order to compile the serial version of the example, you
+can execute the following command:
+
+make example_serial
+
+This creates an executable example_serial/example_serial which can then
+be run.
+

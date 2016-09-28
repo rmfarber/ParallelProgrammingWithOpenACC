@@ -1,0 +1,51 @@
+PGI compiler is used as an example to compile the program. 
+You can use other compiler and change the compilation flags.
+
+How to compile this program?
+========================================================
+To compile the CPU implementation:
+$ cd single_gpu
+$ pgcc -O3 acc_heat_single.c -o heat
+
+To compile the OpenACC version for multi-core CPU:
+$ cd single_gpu
+$ pgcc -O3 -acc -ta=multicore -Minfo=accel acc_heat_single.c -o heat
+
+To compile the OpenACC version for single GPU:
+$ cd single_gpu
+$ pgcc -O3 -acc -ta=tesla:cc35,nofma -Minfo=accel acc_heat_single.c -o heat
+
+To compile the CUDA version for single GPU:
+$ cd single_gpu
+$ nvcc -O3 -arch=sm_35 -fmad=false cuda_heat_single.c -o heat
+
+
+Multi-GPU target
+=====================
+To compile the OpenACC version for multi-GPU:
+$ cd multi_gpu
+$ pgcc -O3 -mp -acc -ta=tesla:cc35,nofma -Minfo=accel acc_heat_multi.c -o heat
+
+To compile the CUDA version for multi-GPU:
+$ cd multi_gpu
+$ pgcc -O3 -I/opt/shared/cuda/7.5.18/include -L/opt/shared/cuda/7.5.18/lib64
+cuda_heat_multi.c -o heat -lcuda 
+$ nvcc -O3 -arch=sm_35 -fmad=false --ptx heat_kernel.cu 
+
+
+How to execute this program?
+========================================================
+for CPU and single GPU
+$ ./heat <ni> <nj> <steps> <output file>
+where ni and nj are the dimension of the grid, steps is the number
+of iterations in 2D Heat Equation.
+e.g. 
+$ ./heat 1024 1024 20000 output.dat
+
+for multi-GPU
+$ ./heat <num GPUs> <ni> <nj> <steps> <output file>
+e.g.
+$ ./heat 2 1024 1024 20000 output.dat
+
+
+
