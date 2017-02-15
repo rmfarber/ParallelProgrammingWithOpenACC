@@ -70,7 +70,7 @@ module matrix_mod
       arow_offsets(i) = idx
       do j=1,27
         nn=i+offsets(j)
-        if ((n.ge.1).and.(n.le.num_rows)) then
+        if ((nn.ge.1).and.(nn.le.num_rows)) then
           a%cols(idx) = nn
           a%coefs(idx) = coefs(j)
           idx = idx + 1
